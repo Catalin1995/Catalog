@@ -5,29 +5,33 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 '''
 
 def test_sumaTermFibo():
-    assert sumaTermFibo(1) == 1
-    assert sumaTermFibo(2) == 3
-    assert sumaTermFibo(3) == 6
-    assert sumaTermFibo(4) == 11
-    assert sumaTermFibo(5) == 19
-    
-def sumaTermFibo(nrTerm):
-    if nrTerm <1:
+    assert sumaTermFibo(2) == 2
+    assert sumaTermFibo(10) == 10
+    assert sumaTermFibo(30) == 10
+    assert sumaTermFibo(90) == 44
+
+def isEven(numar):
+    if numar%2==0:
+        return 1
+    return 0
+
+def sumaTermFibo(value):
+    if value <1:
         return 0
-    elif nrTerm <2:
+    elif value <2:
         return 1
     else:
-        suma = 1
+        suma = 0
         a = 1
         b = 2
-        for i in range(1, nrTerm):
-            suma = suma+b
+        while b<=value:
+            if isEven(b)==1:
+                suma = suma+b
             aux = a+b
             a = b
             b = aux
     return suma
 
-test_sumaTermFibo()
 def main():
     print("Dati valoarea de sfarsit: ", end = "")
     nrTerm = int(input())
@@ -36,3 +40,4 @@ def main():
     print("Suma termenilor este: ", suma)
 
 main()
+test_sumaTermFibo()
