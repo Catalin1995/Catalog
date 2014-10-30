@@ -3,7 +3,8 @@ from flask import Flask, render_template
 from mongoengine import *
 
 DEBUG = True
-connect('tumblelog')
+connect('tumblelog') # connect to mongodb
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 
