@@ -15,15 +15,15 @@ TLDR - this will isolate your python instalation
 Deployment
 ==========
 
-# Install [heroku toolbelt](https://toolbelt.heroku.com/)
-# Change directory to project repository.
-# Add heroku remote
+1. Install [heroku toolbelt](https://toolbelt.heroku.com/)
+2. Change directory to project repository.
+3. Add heroku remote
 
 ```
 git remote add heroku git@heroku.com:agile-ridge-5265.git
 ```
 
-# Push code to heroku
+4. Push code to heroku
 
 ```
 git push heroku master
