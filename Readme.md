@@ -11,3 +11,15 @@ virtualenv venv
 ```
 
 TLDR - this will isolate your python instalation
+
+Deploiment
+==========
+
+Install [heroku toolbelt](https://toolbelt.heroku.com/)
+Change directory to project repository.
+
+Add heroku remote
+```
+git remote add heroku git@heroku.com:agile-ridge-5265.git
+git push heroku master
+```
