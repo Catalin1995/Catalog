@@ -1,8 +1,9 @@
 import os
 from flask import Flask, render_template
+from mongoengine import *
 
 DEBUG = True
-
+connect('tumblelog')
 app = Flask(__name__)
 app.config.from_object(__name__)
 
