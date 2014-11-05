@@ -26,6 +26,8 @@ def elev(name = "Elev Page"):
 
 # FIXME - remove unsued code, does nothing
 @app.route('/students.json')
+def giveStudents():
+        return studentRepository.returnAllStudents()
 
 
 class Student:
@@ -67,8 +69,8 @@ studentRepository.addStudent(student)
 student = Student('catalin','jon')
 studentRepository.addStudent(student)
 
+
 if __name__ == '__main__':
 	port = int(os.environ.get("PORT", 1337))
 	app.run(host='0.0.0.0', port=port)
 	app.run()
- 
