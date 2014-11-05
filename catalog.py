@@ -24,6 +24,20 @@ def clase(name = "Clase Page"):
 def elev(name = "Elev Page"):
     return render_template('elev.html')
 
+@app.route('/students.json', method = "GET")
+class Student:
+	#def __init__(self,student):
+	#		self.s = student
+
+	def __addStud():
+		student = {'nume' : 'Muresan'
+				   'prenume' : 'Ionut-Catalin'
+				   'clasa' : '12-A'
+					}
+
+	def all(self):
+		return student
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 1337))
     app.run(host='0.0.0.0', port=port)
