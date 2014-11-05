@@ -1,9 +1,26 @@
 <!doctype html>
+<HTML>
+    <HEAD>
+<TITLE>Login page</TITLE>
+    </HEAD>
 
-<title>Hello from Flask</title>
+<FORM method = "post">
+	<center>
+	USERNAME: <INPUT type = "text" name= "username" /> <br>
+	PASSWORD: <INPUT type = "text" name= "password" /> <br>
 
+	<input type="radio" name="school" value="teacher">Teacher
+	<input type="radio" name="school" value="student">Student<br>
+	<INPUT type = "submit" name= "Submit" value= "Login" /> <br>
+	</center>
+</FORM>
+
+<a href="clase.html"> Class Page </a>
+
+<!--
 {% if name %}
     <h1>Hello {{ name }}!</h1>
 {% else %}
     <h1>Hello World!</h1>
 {% endif %}
+-->
