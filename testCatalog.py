@@ -4,8 +4,6 @@ import unittest
 from catalog import Student
 
 class catalogTestCase(unittest.TestCase):
-    #def __init__():
-        
     def test_sum(self):
         assert 1+1 == 2
         student = {}
@@ -21,4 +19,3 @@ class catalogTestCase(unittest.TestCase):
 
 if (__name__ == '__main__'):
     unittest.main()
-#qasd
