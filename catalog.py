@@ -5,13 +5,12 @@ from mongoengine import *
 DEBUG = True
 connect('tumblelog') # connect to mongodb
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.config.from_object(__name__)
 
 @app.route('/')
-@app.route('/<name>')
-def index(name=None):
-    return render_template('index.html', name=name)
+def index():
+    return render_template('index.html')
 
 @app.route('/clasa.html')
 def clasa(name = "Class Page"):
