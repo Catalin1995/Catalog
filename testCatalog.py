@@ -9,13 +9,11 @@ class catalogTestCase(unittest.TestCase):
         student = {}
 
     def test_studentRoot(self):
-        nume = "Muresan"
-        prenume = "Ionut"
-        clasa = "12-A"
-        student = Student(nume, prenume, clasa)
-        assert student.nume == "Muresan"
-        assert student.prenume == "Ionut"
-        assert student.clasa == "12-A"   
+        first_name = "Muresan"
+        last_name = "Ionut"
+        student = Student(first_name, last_name)
+        assert student.first_name == "Muresan"
+        assert student.last_name == "Ionut" 
 
 if (__name__ == '__main__'):
     unittest.main()
