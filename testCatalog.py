@@ -14,6 +14,8 @@ class catalogTestCase(unittest.TestCase):
         assert 1+1 == 2
         student = {}
 
+    # FIXME coding style - method name
+    # think of a better name
     def test_studentRoot(self):
         first_name = "Muresan"
         last_name = "Ionut"

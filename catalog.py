@@ -24,6 +24,7 @@ def clase(name = "Clase Page"):
 def elev(name = "Elev Page"):
     return render_template('elev.html')
 
+# FIXME - remove unsued code, does nothing
 @app.route('/students.json')
 class Student:
     def __init__(self, first_name, last_name):
@@ -31,6 +32,7 @@ class Student:
         self.last_name = last_name
 
     def all(self):
+        # FIXME - whitespace
         return [] 
 
 if __name__ == '__main__':

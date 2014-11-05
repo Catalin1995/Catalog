@@ -33,6 +33,11 @@ git remote add heroku git@heroku.com:agile-ridge-5265.git
 git push heroku master
 ```
 
+Coding Style
+============
+
+http://legacy.python.org/dev/peps/pep-0008/
+
 The Joel Test
 =============
 
