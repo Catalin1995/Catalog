@@ -4,6 +4,7 @@ import unittest
 from catalog import Student, StudentRepository
 
 class BaseTestCase(unittest.TestCase):
+    
     def setUp(self):
         catalog.app.config['TESTING'] = True
         self.app = catalog.app.test_client()
