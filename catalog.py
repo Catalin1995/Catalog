@@ -36,31 +36,25 @@ def elev(name = "Elev Page"):
 @app.route('/students.json')
 def get_students():
         
-        return studentRepository.return_all_students()
+    return studentRepository.return_all_students()
 
 
 @app.route('/students/:id.json')
 def get_studentsId():
         
-        return studentRepositoryget.get_student_index(index)
+    return studentRepositoryget.get_student_index(index)
 
 
 @app.route('/students.json')
 def give_students():
-        student = Student(last_name, first_name)
-        studentRepository.add_student(student)
-
-
-@app.route('/students/:id.json')
-def give_students():
-        
-        return studentRepository.return_all_students()
+    student = Student(last_name, first_name)
+    studentRepository.add_student(student)
 
 
 @app.route('/students/:id.json')
 def delete_students_id():
         
-        remove_student_index(index)
+    remove_student_index(index)
 
 
 class Student:
