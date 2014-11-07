@@ -51,7 +51,7 @@ def get_students_id(id=None):
 @app.route('/students.json', methods = ['POST'])
 def give_students():
     
-    student = Student('alex','stanciu')
+    student = Student('Alex','Stanciu')
     studentRepository.add_student(student)
     return json.dumps(student.get_student())
 
@@ -59,9 +59,7 @@ def give_students():
 def modify_student():
     
     id = 1
-    firt_name = 'Maries'
-    last_name = 'Alexandru'
-    student = Student('maries', 'alexandru')
+    student = Student('Maries', 'Alexandru')
     stud = student.get_student()
     studentRepository.modify_student(stud, id)
     return json.dumps(stud)
