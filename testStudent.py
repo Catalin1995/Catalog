@@ -25,17 +25,17 @@ class StudentTestCase(unittest.TestCase):
         first_name = 'Muresan'
         last_name = 'Ionut'
         student = Student(first_name, last_name)
-        stud = student.getStudent()
+        stud = student.get_student()
         assert stud['first_name'] == 'Muresan'
         assert stud['last_name'] == 'Ionut' 
 
         first_name = 'Minteuan'
         last_name = 'Dan'
         student = Student(first_name, last_name)
-        stud = student.getStudent()
+        stud = student.get_student()
         assert stud['first_name'] == 'Minteuan'
         assert stud['last_name'] == 'Dan'
 
-        
+
 if (__name__ == '__main__'):
     unittest.main()
