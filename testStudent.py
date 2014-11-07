@@ -15,7 +15,7 @@ class StudentTestCase(unittest.TestCase):
 
     # FIXME coding style - method name
     # think of a better name
-    def test_studentClass(self):
+    def test_student_class(self):
         
         first_name = "Muresan"
         last_name = "Ionut"
@@ -24,7 +24,7 @@ class StudentTestCase(unittest.TestCase):
         assert student.last_name == "Ionut" 
 
 
-    def test_getStudent(self):
+    def test_get_student(self):
 
         first_name = 'Muresan'
         last_name = 'Ionut'
