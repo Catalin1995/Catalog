@@ -1,17 +1,32 @@
 <!doctype html>
 <html lang="en" ng-app="catalogApp">
-  <head>
-    <meta charset="utf-8">
-    <title>My HTML File</title>
-  </head>
-  <body ng-controller="StudentListController">
+<head>
+	<meta charset="utf-8">
+	<title>My HTML File</title>
+</head>
+<body ng-controller="StudentListController">
 
-    <ul>
-      <li ng-repeat="student in students">{{student.first_name}}</li>
-    </ul>
+	<table border=5 style= "width:40%">
+		<thead>
+			<tr>
+				<th>First name</th>
+				<th>Last name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="student in students">
+				<td>{{student.first_name}}</td>
+				<td>{{student.last_name}}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-resource.js"></script>
-    <script src="/js/catalog.js"></script>
-  </body>
+	{{aux}}
+	<br />
+	<input type="text" ng-model="aux"/>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-resource.js"></script>
+	<script src="/js/catalog.js"></script>
+</body>
 </html>
