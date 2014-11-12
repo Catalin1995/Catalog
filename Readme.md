@@ -66,3 +66,5 @@ virtualenv venv
 ```
 
 TLDR - this will isolate your python instalation
+
+https://pypi.python.org/pypi/pep8

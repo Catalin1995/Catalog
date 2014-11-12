@@ -1,5 +1,6 @@
 import catalog
 import os
+import pep8
 import unittest
 from catalog import Student, StudentRepository
 
@@ -41,5 +42,6 @@ class StudentTestCase(unittest.TestCase):
         assert stud['last_name'] == 'Dan'
 
 
+print("Found %s errors (and warnings)" % file_errors)
 if (__name__ == '__main__'):
     unittest.main()

@@ -1,8 +1,10 @@
 import os
+import pep8
 import catalog
 import unittest
 import tempfile
 from flask import json
+
 
 class FlaskrTestCase(unittest.TestCase):
 
