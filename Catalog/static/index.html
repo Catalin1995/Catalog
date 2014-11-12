@@ -30,10 +30,16 @@
 	</table>
 
 
-	{{idStud}}
 	Care elev doriti sa-l afisati: <input type="number" ng-model="idStud"/>
 	<button type= "button" ng-click="give_stud()" >PrintStud</button> <br>
-	{{studentId}} <br>
+
+	{{studentId.first_name}}
+	{{studentId.last_name}}
+	{{studentId.clasa}}
+	{{studentId.data_nasteri}}
+	{{studentId.adresa}}
+	{{studentId.alte_informati}}
+	{{studentId.Id}}
 
 	<!--{{aux}}
 	<br />

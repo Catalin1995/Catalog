@@ -40,11 +40,19 @@ def get_students():
     return json.dumps(all_students)
 
 
-@app.route('/students/<int:id>.json', methods = ['GET'])
+@app.route('/students/<id>.json', methods = ['GET'])
 def get_students_id(id):
 
-    #idStud = request.args.get('id', None)
+    id = int(id)
     all_students = studentRepository.return_all_students()
+    if id>len(all_students)-1:
+        error = {}
+        error['Id'] = 'Id-ul este prea mare'
+        return json.dumps(error)
+    if id<0:
+        error = {}
+        error['Id'] = 'Id-ul este prea mic'
+        return json.dumps(error)
     return json.dumps(all_students[id])
 
 
