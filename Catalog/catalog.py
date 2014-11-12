@@ -1,9 +1,6 @@
 import os
-import pep8
-from flask import Flask, render_template, json
+from flask import Flask, render_template, json, redirect
 from mongoengine import connect 
-
-#from flask.json import jsonify
 
 DEBUG = True
 connect('tumblelog') # connect to mongodb
@@ -14,7 +11,7 @@ app.config.from_object(__name__)
 @app.route('/')
 def index():
     
-    return render_template('index.html')
+    return redirect('/index.html')
 
 
 @app.route('/clasa.html')
@@ -98,7 +95,7 @@ class StudentRepository:
     def add_student(self, student):
 
         self.students.append(student.get_student())
-     
+
                 
     def return_all_students(self):
        
