@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, json, redirect
+from flask import Flask, render_template, json, redirect, request
 from mongoengine import connect 
 
 DEBUG = True
@@ -40,17 +40,19 @@ def get_students():
     return json.dumps(all_students)
 
 
-@app.route('/students/:id.json', methods = ['GET'])
-def get_students_id(id = None):
+@app.route('/students/<int:id>.json', methods = ['GET'])
+def get_students_id(id):
 
+    #idStud = request.args.get('id', None)
     all_students = studentRepository.return_all_students()
-    return json.dumps(all_students[0])
+    return json.dumps(all_students[id])
 
 
 @app.route('/students.json', methods = ['POST'])
 def give_students():
     
-    student = Student('Alex','Stanciu')
+    #year = request.args.get('year')
+    student = Student('Dan','Ciprian', '9-D', '5/5/1555', 'Cluj', 'Telefon: 5555555555')
     studentRepository.add_student(student)
     return json.dumps(student.get_student())
 
@@ -58,7 +60,7 @@ def give_students():
 def modify_student():
     
     id = 1
-    student = Student('Maries', 'Alexandru')
+    student = Student('Maries', 'Alexandru', '10-A', '10/3/1996', '1 Decembrie', 'Telefon: 4444444444')
     stud = student.get_student()
     studentRepository.modify_student(stud, id)
     return json.dumps(stud)
@@ -72,16 +74,24 @@ def delete_students_id(id = None):
 
 class Student:  
     
-    def __init__(self, first_name, last_name):
+    def __init__(self, first_name, last_name, clasa, data_nasteri, adresa, alte_informati):
     
         self.first_name = first_name
         self.last_name = last_name
+        self.clasa = clasa
+        self.data_nasteri = data_nasteri
+        self.adresa = adresa
+        self.alte_informati = alte_informati
         
     def get_student(self):
                 
         self.stud = {}
         self.stud['first_name'] = self.first_name
         self.stud['last_name'] = self.last_name
+        self.stud['clasa'] = self.clasa
+        self.stud['data_nasteri'] = self.data_nasteri
+        self.stud['adresa'] = self.adresa
+        self.stud['alte_informati'] = self.alte_informati
         return (self.stud)
 
 
@@ -119,13 +129,13 @@ class StudentRepository:
 
 studentRepository = StudentRepository()
 
-student = Student('Ionut','Muresan')
+student = Student('Muresan', "Ionut", '12-A', '27/10/1995', 'Dorobantilor 90', 'Telefon: 1111111111')
 studentRepository.add_student(student)
 
-student = Student('Dan','Minteuan')
+student = Student('Dan','Minteuan', '11-B', '10/3/1996', '1 Decembrie', 'Telefon: 2222222222')
 studentRepository.add_student(student)
 
-student = Student('Catalin','Jon')
+student = Student('Stanciu','Alex', '11-c', '3/11/1990', 'Nasaud 10', 'Telefon: 3333333333')
 studentRepository.add_student(student)
 
 if __name__ == '__main__':
