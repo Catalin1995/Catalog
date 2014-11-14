@@ -23,16 +23,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
   $scope.idStud = "";
   $scope.studentId = {};
   $scope.studentId['Id'] = "";
-  $scope.valid_add_student = ""
-
-  function validate_id(idStud){
-    if (idStud == "") {
-      return false;
-    }
-    else {
-      return true;
-    }
-  }
+  $scope.valid_add_student = "";
 
   function validate_add_student(){
     if ($scope.first_name == ""){
@@ -64,7 +55,14 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     $scope.adresa_mod = $scope.studentId['adresa'];
     $scope.alte_informati_mod = $scope.studentId['alte_informati'];
   }
-
+  function remove_type_text(){
+    $scope.first_name_mod = "";
+    $scope.last_name_mod = "";
+    $scope.clasa_mod = "";
+    $scope.data_nasteri_mod = ""; 
+    $scope.adresa_mod = "";
+    $scope.alte_informati_mod = "";
+  }
   function remove_all(){
     $scope.first_name = "";
     $scope.last_name = "";
@@ -98,8 +96,6 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
   }
 
   $scope.give_stud = function(){
-    var valid = validate_id($scope.idStud);
-    if (valid == 1) {
       var url = "/students/"+$scope.idStud+".json";
       $http.get(url).then(function (result) {
         console.log(result);
@@ -107,22 +103,13 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
         complete_type_text()
       });
     }
-    else{
-     $scope.studentId['Id'] = "Invalid Id!!!";
-   }
- }
 
  $scope.delete_student_id = function(){
-   if (validate_id($scope.idStud)) {
     var url = "/students/"+$scope.idStud+".json";
     $http.delete(url).then(function (result){
       console.log(result);
       $scope.students = result.data;
     });
-  }
-  else{
-   $scope.studentId['Id'] = "Invalid Id!!!";
- }
 }
 
 $scope.adauga_student = function(){
@@ -149,17 +136,8 @@ $scope.modifica_student = function(){
     var url = "/students/"+$scope.idStud+".json";
     $http.patch(url, student).then(function (result){
       console.log(result);
-      //$scope.students = result.data;
+      $scope.students = result.data;
     });
   }
 }
-  //$scope.studentId = $scope.give_stud();
-  //$scope.aux = 1;
-  //$scope.first_name = "Last name";
-  //$scope.last_name  = "First name";
-
-  //$http.post('/students.json', first_name, last_name).then(function(result) {
-  //	console.log(result);
-  //	$scope.student = result.data;
-  //});
 });

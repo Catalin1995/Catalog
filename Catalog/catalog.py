@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, json, redirect, request
 from mongoengine import connect 
 from flask.json import jsonify
+from mongoengine import *
 
 DEBUG = True
 connect('tumblelog') # connect to mongodb
@@ -46,20 +47,21 @@ def give_students():
     return json.dumps(student.dict_student())
 
 @app.route('/students/<id>.json', methods = ['PATCH'])
-def modify_student(id):
+def modif_student(id):
     id = int(id)
     stud = request.get_json()
     student = Student(stud)
     studentRepository.modify_student(student, id)
-    all_students = studentRepository.return_all_students()
-    return json.dumps(all_students)
+    return json.dumps(studentRepository.return_all_students())
 
 
 @app.route('/students/<id>.json', methods=['DELETE'])
 def delete_students_id(id):
     
     id = int(id)
-    studentRepository.remove_student_index(id)
+    all_students = studentRepository.return_all_students()
+    if id<len(all_students) and id>=0:
+        studentRepository.remove_student_index(id)
     return json.dumps(studentRepository.students)
     
 
@@ -83,8 +85,15 @@ class Student:
         self.stud['data_nasteri'] = self.data_nasteri
         self.stud['adresa'] = self.adresa
         self.stud['alte_informati'] = self.alte_informati
-        print(self.stud)
         return self.stud
+
+class Student2(Document):
+    first_name = StringField(max_length=50)
+    last_name = StringField(max_length=50)
+    clasa = StringField(max_length=50)
+    data_nasteri = StringField(max_length=50)
+    adresa = StringField(max_length=50)
+    alte_informati = StringField(max_length=50)
 
 
 class StudentRepository:
@@ -116,7 +125,7 @@ class StudentRepository:
     
     def modify_student(self, student, id):
             
-        self.students[id]  = student
+        self.students[id]  = student.dict_student()
 
 
 studentRepository = StudentRepository()
@@ -148,6 +157,10 @@ data['alte_informati'] = 'Telefon: 3333333333'
 student = Student(data)
 studentRepository.add_student(student)
 
+email = "muresan.ionut@csubb.com"
+first_name = "muresan"
+last_name = "ionut"
+    
 if __name__ == '__main__':
         
     port = int(os.environ.get("PORT", 1337))
