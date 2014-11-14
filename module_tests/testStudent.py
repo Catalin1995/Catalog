@@ -3,6 +3,7 @@ import os
 import pep8
 import unittest
 from catalog import Student, StudentRepository
+from catalog import Student2
 
 class BaseTestCase(unittest.TestCase):
     
@@ -53,17 +54,34 @@ class StudentTestCase(unittest.TestCase):
         assert stud['data_nasteri'] == "11/11/1111" 
         assert stud['adresa'] == "Dorobantilor 90" 
         assert stud['alte_informati'] == "telefon: 1104823"
-#         stud = student.get_student()
-#         assert stud['first_name'] == 'Muresan'
-#         assert stud['last_name'] == 'Ionut' 
-# 
-#         first_name = 'Minteuan'
-#         last_name = 'Dan'
-#         student = Student(first_name, last_name)
-#         stud = student.get_student()
-#         assert stud['first_name'] == 'Minteuan'
-#         assert stud['last_name'] == 'Dan'
-
-
+    
+    def test_student2_class(self):
+        student = Student2()
+        student.first_name = "Muresan"
+        student.last_name = "Ionut"
+        student.clasa = "12-A"
+        student.data_nasteri = "27/10/1995"
+        student.adresa = "Dorobantilor 90"
+        student.alte_informati = "Telefon: 1"
+        dimension = len(Student2.objects)
+        student.save()
+        assert len(Student2.objects) == dimension+1
+        student.delete()
+        
+        student = Student2()
+        student.first_name = "Dan"
+        student.last_name = "Minteuan"
+        student.clasa = "10-C"
+        student.data_nasteri = "11/04/2000"
+        student.adresa = "Nasaud 19"
+        student.alte_informati = "Telefon: 2"
+        dimension = len(Student2.objects) 
+        student.save()
+        assert len(Student2.objects) == dimension+1
+        
+        student.delete()
+        nume = Student2.objects(first_name="Muresan").count()
+        print("nume= ",nume)
+        
 if (__name__ == '__main__'):
     unittest.main()

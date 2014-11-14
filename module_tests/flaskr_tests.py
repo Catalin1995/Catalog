@@ -54,7 +54,7 @@ class FlaskrTestCase(unittest.TestCase):
 
 
     def test_give_students(self):
-        # 
+
         student = dict(first_name='Dan', 
                    last_name='Ciprian',
                    clasa='9-D',
@@ -64,7 +64,6 @@ class FlaskrTestCase(unittest.TestCase):
 
         rv = self.app.post ('/students.json', data=json.dumps(student), content_type='application/json')
         data = json.loads(rv.data)
- 
         assert data['first_name'] == 'Dan'
         assert data['last_name'] == 'Ciprian'
         assert data['clasa'] == '9-D'
@@ -73,21 +72,22 @@ class FlaskrTestCase(unittest.TestCase):
         assert data['alte_informati'] == 'Telefon: 5555555555' 
             
     def test_modify_student(self):
+
         student = dict(first_name='Dan', 
                    last_name='Ciprian',
                    clasa='9-D',
                    data_nasteri='5/5/1555',
                    adresa='Cluj',
                    alte_informati='Telefon: 5555555555')
-
         rv = self.app.patch('/students/2.json', data=json.dumps(student), content_type='application/json')
         data = json.loads(rv.data)
-        assert data['first_name'] == 'Dan'
-        assert data['last_name'] == 'Ciprian'
-        assert data['clasa'] == '9-D'
-        assert data['data_nasteri'] == '5/5/1555'
-        assert data['adresa'] == 'Cluj'
-        assert data['alte_informati'] == 'Telefon: 5555555555'
+        print(data)
+        assert data[2]['first_name'] == 'Dan'
+        assert data[2]['last_name'] == 'Ciprian'
+        assert data[2]['clasa'] == '9-D'
+        assert data[2]['data_nasteri'] == '5/5/1555'
+        assert data[2]['adresa'] == 'Cluj'
+        assert data[2]['alte_informati'] == 'Telefon: 5555555555'
 
     
     def test_delete_student_id(self):
