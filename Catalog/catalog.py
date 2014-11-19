@@ -11,7 +11,7 @@ DEBUG = True
 
 db_name = 'tumblelog'
 
-connect(db_name) # connect to mongodb
+connect(db_name)  # connect to mongodb
 
 app = Flask(__name__, static_url_path='')
 app.config.from_object(__name__)
@@ -22,26 +22,26 @@ def index():
     return redirect('/index.html')
 
 # FIXME - remove unsued code, does nothing
-@app.route('/students.json', methods = ['GET'])
+@app.route('/students.json', methods=['GET'])
 def get_students():
     return Student.objects.all().to_json()
 
 
-@app.route('/students/<id>.json', methods = ['GET'])
+@app.route('/students/<id>.json', methods=['GET'])
 def get_students_id(id):
     all_students = Student.objects
     for student in all_students:
         if str(student.id) == id:
             return student.to_json()
 
-@app.route('/students.json', methods = ['POST'])
+@app.route('/students.json', methods=['POST'])
 def give_students():
     stud = request.get_json()
     student = save_student(stud)
     return student.to_json()
 
 
-@app.route('/students/<id>.json', methods = ['PATCH'])
+@app.route('/students/<id>.json', methods=['PATCH'])
 def modif_student(id):
     stud = request.get_json()
     modifica_student(id, stud)
