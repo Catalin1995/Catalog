@@ -6,7 +6,7 @@
 </head>
 <body ng-controller="StudentListController">
 
-	<table border=5 style= "width:40%">
+	<table border=5 style= "width:70%">
 		<thead>
 			<tr>
 				<th>First name</th>
@@ -15,6 +15,7 @@
 				<th>Data nasteri</th>
 				<th>Adresa</th>
 				<th>Alte informati</th>
+				<th>ID</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,6 +26,9 @@
 				<td>{{student.data_nasteri}}</td>
 				<td>{{student.adresa}}</td>
 				<td>{{student.alte_informati}}</td>
+				<td>{{student._id}}</td>
+				<td><button type = "button" ng-click = "give_stud()"/>PrintStud</button>
+				<button type = "button" ng-click = "delete_student_id()"/>Delete</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -32,7 +36,7 @@
 
 	Care elev doriti sa-l afisati:
 	{{idStud}}
-	<input type="number" ng-model="idStud"/>
+	<input type="text" ng-model="idStud"/>
 	<button type= "button" ng-click= "give_stud()" >PrintStud</button> 
 	<button type= "button" ng-click= "delete_student_id()">Delete</button> <br>
 
