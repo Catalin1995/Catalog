@@ -24,12 +24,12 @@ def index():
 # FIXME - remove unsued code, does nothing
 @app.route('/students.json', methods = ['GET'])
 def get_students():
-    return Student2.objects.all().to_json()
+    return Student.objects.all().to_json()
 
 
 @app.route('/students/<id>.json', methods = ['GET'])
 def get_students_id(id):
-    all_students = Student2.objects
+    all_students = Student.objects
     for student in all_students:
         if str(student.id) == id:
             return student.to_json()
@@ -45,18 +45,18 @@ def give_students():
 def modif_student(id):
     stud = request.get_json()
     modifica_student(id, stud)
-    all_students = Student2.objects
+    all_students = Student.objects
     return all_students.to_json()
 
 
 @app.route('/students/<id>.json', methods=['DELETE'])
 def delete_students_id(id):
     delete_student(id)
-    all_students = Student2.objects
+    all_students = Student.objects
     return all_students.to_json()
 
 
-class Student2(Document):
+class Student(Document):
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
     clasa = StringField(max_length=50)
@@ -66,7 +66,7 @@ class Student2(Document):
 
 
 def save_student(stud):
-    student = Student2()
+    student = Student()
     student.first_name = stud['first_name']
     student.last_name = stud['last_name']
     student.clasa = stud['clasa']
@@ -77,7 +77,7 @@ def save_student(stud):
     return student
 
 def modifica_student(id, student):
-    for stud in Student2.objects:
+    for stud in Student.objects:
         if str(stud.id) == id:
             stud.first_name = student['first_name']
             stud.last_name = student['last_name']
@@ -88,7 +88,7 @@ def modifica_student(id, student):
             stud.save()
             
 def delete_student(id):
-    for stud in Student2.objects:
+    for stud in Student.objects:
         if str(stud.id) == id:
             stud.delete()
             break

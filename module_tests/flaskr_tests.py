@@ -3,7 +3,7 @@ import pep8
 import catalog
 import unittest
 import tempfile
-from catalog import Student2
+from catalog import Student
 from flask import json
 from email.quoprimime import body_check
 
@@ -15,7 +15,7 @@ class FlaskrTestCase(unittest.TestCase):
         self.app = catalog.app.test_client()
         
     def test_id(self):
-        for i in Student2.objects:
+        for i in Student.objects:
             print(i.id)
     
     def create_student(self, first_name, last_name, clasa, data_nasteri, adresa, alte_informati):
