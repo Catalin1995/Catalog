@@ -13,10 +13,8 @@ class FlaskrTestCase(unittest.TestCase):
     def setUp(self):
         catalog.app.config['TESTING'] = True
         self.app = catalog.app.test_client()
-        
-    def test_id(self):
-        for i in Student.objects:
-            print(i.id)
+    
+    Student.objects.delete()
     
     def create_student(self, first_name, last_name, clasa, data_nasteri, adresa, alte_informati):
         student = dict(first_name = first_name,
@@ -91,7 +89,6 @@ class FlaskrTestCase(unittest.TestCase):
             if data[i]['_id']['$oid'] == id:
                 assert False
         assert True
-        
 
 if __name__ == '__main__':
     unittest.main()
