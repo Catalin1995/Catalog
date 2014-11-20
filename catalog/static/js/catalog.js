@@ -95,8 +95,8 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     return (student);
   }
 
-  $scope.give_stud = function(){
-      var url = "/students/"+$scope.idStud+".json";
+  $scope.give_stud = function(id_student){
+      var url = "/students/"+id_student+".json";
       $http.get(url).then(function (result) {
         console.log(result);
         $scope.studentId = result.data;
@@ -104,8 +104,8 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
       });
     }
 
- $scope.delete_student_id = function(){
-    var url = "/students/"+$scope.idStud+".json";
+ $scope.delete_student_id = function(id_student){
+    var url = "/students/"+id_student+".json";
     $http.delete(url).then(function (result){
       console.log(result);
       $scope.students = result.data;

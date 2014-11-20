@@ -26,9 +26,9 @@
 				<td>{{student.data_nasteri}}</td>
 				<td>{{student.adresa}}</td>
 				<td>{{student.alte_informati}}</td>
-				<td>{{student._id}}</td>
-				<td><button type = "button" ng-click = "give_stud()"/>PrintStud</button>
-				<button type = "button" ng-click = "delete_student_id()"/>Delete</button></td>
+				<td>{{student._id.$oid}}</td>
+				<td><button type = "button" ng-click = "give_stud(student._id.$oid)"/>PrintStud</button>
+				<button type = "button" ng-click = "delete_student_id(student._id.$oid)"/>Delete</button></td>
 			</tr>
 		</tbody>
 	</table>

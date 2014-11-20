@@ -6,6 +6,7 @@ from mongoengine import *
 from pip._vendor.html5lib.serializer import serialize
 from bson import json_util
 from bson.objectid import ObjectId
+from module.modifStudent import modifica_student, delete_student, save_student
 
 DEBUG = True
 
@@ -37,21 +38,22 @@ def get_students_id(id):
 @app.route('/students.json', methods=['POST'])
 def give_students():
     stud = request.get_json()
-    student = save_student(stud)
+    student = Student(stud)
     return student.to_json()
 
 
 @app.route('/students/<id>.json', methods=['PATCH'])
 def modif_student(id):
     stud = request.get_json()
-    modifica_student(id, stud)
+    modifica_student(id, stud, Student.objects)
     all_students = Student.objects
     return all_students.to_json()
 
 
 @app.route('/students/<id>.json', methods=['DELETE'])
 def delete_students_id(id):
-    delete_student(id)
+    print(id)
+    delete_student(id, Student.objects)
     all_students = Student.objects
     return all_students.to_json()
 
@@ -63,35 +65,24 @@ class Student(Document):
     data_nasteri = StringField(max_length=50)
     adresa = StringField(max_length=50)
     alte_informati = StringField(max_length=50)
-
-
-def save_student(stud):
-    student = Student()
-    student.first_name = stud['first_name']
-    student.last_name = stud['last_name']
-    student.clasa = stud['clasa']
-    student.data_nasteri = stud['data_nasteri']
-    student.adresa = stud['adresa']
-    student.alte_informati = stud['alte_informati']
-    student.save()
-    return student
-
-def modifica_student(id, student):
-    for stud in Student.objects:
-        if str(stud.id) == id:
-            stud.first_name = student['first_name']
-            stud.last_name = student['last_name']
-            stud.clasa = student['clasa']
-            stud.data_nasteri = student['data_nasteri']
-            stud.adresa = student['adresa']
-            stud.alte_informati = student['alte_informati']
-            stud.save()
+    
+    def modifica_student(id, student, all_students):
+        for stud in all_students:
+            if str(stud.id) == id:
+                stud.first_name = student['first_name']
+                stud.last_name = student['last_name']
+                stud.clasa = student['clasa']
+                stud.data_nasteri = student['data_nasteri']
+                stud.adresa = student['adresa']
+                stud.alte_informati = student['alte_informati']
+                stud.save()
             
-def delete_student(id):
-    for stud in Student.objects:
-        if str(stud.id) == id:
-            stud.delete()
-            break
+    def delete_student(id, all_students):
+        for stud in all_students:
+            if str(stud.id) == id:
+                stud.delete()
+                break
+
     
 if __name__ == '__main__':
         
