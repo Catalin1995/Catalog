@@ -1,19 +1,17 @@
 import pep8
-import catalog
 import unittest
+import catalog
 import tempfile
-from catalog import Student
 from flask import json
 from email.quoprimime import body_check
-
+from catalog.catalog import *
 
 class FlaskrTestCase(unittest.TestCase):
 
     def setUp(self):
-        catalog.app.config['TESTING'] = True
-        self.app = catalog.app.test_client()
-
-    Student.objects.delete()
+        Student.objects.delete()
+        catalog.catalog.app.config['TESTING'] = True
+        self.app = catalog.catalog.app.test_client()
 
     def create_student(self, first_name, last_name, clasa,
                        data_nasteri, adresa, alte_informati):
@@ -102,6 +100,7 @@ class FlaskrTestCase(unittest.TestCase):
             if data[i]['_id']['$oid'] == id:
                 assert False
         assert True
+
 
 if __name__ == '__main__':
     unittest.main()

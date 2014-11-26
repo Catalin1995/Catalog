@@ -1,16 +1,16 @@
-import catalog
 import os
 import pep8
 import unittest
-from catalog import Student
+import catalog
+from catalog.catalog import *
 
 
 class BaseTestCase(unittest.TestCase):
-
+ 
     def setUp(self):
-
-        catalog.app.config['TESTING'] = True
-        self.app = catalog.app.test_client()
+ 
+        catalog.catalog.app.config['TESTING'] = True
+        self.app = catalog.catalog.app.test_client()
 
 
 class StudentTestCase(unittest.TestCase):
@@ -27,7 +27,7 @@ class StudentTestCase(unittest.TestCase):
         student.save()
         assert len(Student.objects) == dimension+1
         student.delete()
-
+ 
         student = Student()
         student.first_name = "Dan"
         student.last_name = "Minteuan"
@@ -38,13 +38,9 @@ class StudentTestCase(unittest.TestCase):
         dimension = len(Student.objects)
         student.save()
         assert len(Student.objects) == dimension+1
-
+ 
         student.delete()
         nume = Student.objects(first_name="Muresan").count()
-
-    def test_hello_world(self):
-        student = Student()
-        assert student.hello_world() == "hello world"
 
     def test_update_student(self):
         oldStud = Student('muresan', 'ionut', '12-A',
@@ -56,7 +52,7 @@ class StudentTestCase(unittest.TestCase):
         newStud['data_nasteri'] = '11/11/1111'
         newStud['adresa'] = 'Dorobantilor 1'
         newStud['alte_informati'] = 'Telefon: 2'
-
+ 
         oldStud.update_student(newStud)
         assert oldStud.first_name == 'dan'
         assert oldStud.last_name == 'minteuan'
@@ -64,6 +60,7 @@ class StudentTestCase(unittest.TestCase):
         assert oldStud.data_nasteri == '11/11/1111'
         assert oldStud.adresa == 'Dorobantilor 1'
         assert oldStud.alte_informati == 'Telefon: 2'
+
 
 if (__name__ == '__main__'):
     unittest.main()

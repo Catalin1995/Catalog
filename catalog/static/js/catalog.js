@@ -24,7 +24,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
   $scope.studentId = {};
   $scope.studentId['Id'] = "";
   $scope.valid_add_student = "";
-
+  $scope.valid_modif_student = "";
   function validate_add_student(){
     if ($scope.first_name == ""){
       return false;
@@ -95,15 +95,40 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     return (student);
   }
 
+  function validate_modif_student(student){
+    if (student.first_name == ""){
+      return false;
+    }
+    if (student.last_name == ""){
+      return false;
+    }
+    if (student.clasa == ""){
+      return false;
+    }
+    if (student.data_nasteri == ""){
+      return false;
+    }
+    if (student.adresa == ""){
+      return false;
+    }
+    if (student.alte_informati == ""){
+      return false;
+    }
+    return true;
+  }
   $scope.give_stud = function(id_student){
       var url = "/students/"+id_student+".json";
       $http.get(url).then(function (result) {
+        $scope.idStud = id_student
         console.log(result);
         $scope.studentId = result.data;
-        complete_type_text()
+        //complete_type_text()
       });
     }
 
+  $scope.modif_stud = function(){
+    complete_type_text()
+  }
  $scope.delete_student_id = function(id_student){
     var url = "/students/"+id_student+".json";
     $http.delete(url).then(function (result){
@@ -131,13 +156,17 @@ $scope.adauga_student = function(){
 
 
 $scope.modifica_student = function(){
-  if(validate_id($scope.idStud)){
     var student = create_student_to_modif();
+   if (!validate_modif_student(student)){
+     $scope.valid_modif_student = "Invalid";
+   }
+    else{
     var url = "/students/"+$scope.idStud+".json";
     $http.patch(url, student).then(function (result){
       console.log(result);
       $scope.students = result.data;
+      $scope.valid_modif_student = "Studentul a fost modificat!"
     });
-  }
+   }
 }
 });
