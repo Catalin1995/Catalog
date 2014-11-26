@@ -5,7 +5,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
   	console.log(result);
   	$scope.students = result.data;
   });
-
+  $scope.note = "";
   $scope.first_name_mod = ""; 
   $scope.last_name_mod = "";
   $scope.clsa_mod = "";
@@ -13,7 +13,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
   $scope.adresa_mod = "";
   $scope.alte_informati_mod = "";
 
-  $scope.first_name = "";
+  $scope.first_name = "aaa";
   $scope.last_name = "";
   $scope.clasa = "";
   $scope.data_nasteri = "";
@@ -116,6 +116,15 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     }
     return true;
   }
+
+  $scope.afisare_note = function(id){
+    $scope.note = 1;
+    ionut = [1,2,3,5,6]
+    for (i=0;i<=ionut.length;i++){
+      $scope.note = $scope.note + ionut[i];
+    }
+  }
+
   $scope.give_stud = function(id_student){
       var url = "/students/"+id_student+".json";
       $http.get(url).then(function (result) {
@@ -129,6 +138,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
   $scope.modif_stud = function(){
     complete_type_text()
   }
+  
  $scope.delete_student_id = function(id_student){
     var url = "/students/"+id_student+".json";
     $http.delete(url).then(function (result){

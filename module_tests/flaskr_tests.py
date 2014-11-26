@@ -73,45 +73,52 @@ class FlaskrTestCase(unittest.TestCase):
         assert data['note'] == ['10','10','10']
         assert data['absente'] == ['5/10/2013', '5/20/1010']
 
-#     def test_modify_student(self):
-# 
-#         stud = self.create_student('Muresan', 'Ionut', '12-A',
-#                                    '27/10/1995', 'Dorobantilor 90',
-#                                    'Telefon: 10')
-#         id = stud['_id']['$oid']
-#         student = dict(first_name='Zamisnicu',
-#                        last_name='Andreea',
-#                        clasa='10-D',
-#                        data_nasteri='01/03/1990',
-#                        adresa='Cluj',
-#                        alte_informati='Telefon: 3')
-#         rv = self.app.patch('/students/'+id+'.json',
-#                             data=json.dumps(student),
-#                             content_type='application/json')
-#         data = json.loads(rv.data)
-# 
-#         for i in range(len(data)):
-#             if data[i]['_id']['$oid'] == id:
-#                         assert data[i]['first_name'] == 'Zamisnicu'
-#                         assert data[i]['last_name'] == 'Andreea'
-#                         assert data[i]['clasa'] == '10-D'
-#                         assert data[i]['data_nasteri'] == '01/03/1990'
-#                         assert data[i]['adresa'] == 'Cluj'
-#                         assert data[i]['alte_informati'] == 'Telefon: 3'
-#                         break
-# 
-#     def test_delete_student_id(self):
-# 
-#         stud = self.create_student('Muresan', 'Ionut', '12-A',
-#                                    '27/10/1995', 'Dorobantilor 90',
-#                                    'Telefon: 10')
-#         id = stud['_id']['$oid']
-#         rv = self.app.delete('/students/'+id+'.json')
-#         data = json.loads(rv.data)
-#         for i in range(len(data)):
-#             if data[i]['_id']['$oid'] == id:
-#                 assert False
-#         assert True
+    def test_modify_student(self):
+ 
+        stud = self.create_student('Muresan', 'Ionut', '12-A',
+                                   '27/10/1995', 'Dorobantilor 90',
+                                   'Telefon: 10', ['10','10','10'],
+                                   ['5/10/2013', '5/20/1010'])
+        id = stud['_id']['$oid']
+        student = dict(first_name='Zamisnicu',
+                       last_name='Andreea',
+                       clasa='10-D',
+                       data_nasteri='01/03/1990',
+                       adresa='Cluj',
+                       alte_informati='Telefon: 3',
+                       note = ['10','10','10'],
+                       absente = ['5/10/2013', '5/20/1010'])
+        rv = self.app.patch('/students/'+id+'.json',
+                            data=json.dumps(student),
+                            content_type='application/json')
+        data = json.loads(rv.data)
+ 
+        for i in range(len(data)):
+            if data[i]['_id']['$oid'] == id:
+                        assert data[i]['first_name'] == 'Zamisnicu'
+                        assert data[i]['last_name'] == 'Andreea'
+                        assert data[i]['clasa'] == '10-D'
+                        assert data[i]['data_nasteri'] == '01/03/1990'
+                        assert data[i]['adresa'] == 'Cluj'
+                        assert data[i]['alte_informati'] == 'Telefon: 3'
+                        assert data[i]['note'] == ['10','10','10']
+                        assert data[i]['absente'] == ['5/10/2013', '5/20/1010']
+                        break
+ 
+    def test_delete_student_id(self):
+  
+        stud = self.create_student('Muresan', 'Ionut', '12-A',
+                                   '27/10/1995', 'Dorobantilor 90',
+                                   'Telefon: 10',
+                                   ['10','10','10'],
+                                   ['5/10/2013', '5/20/1010'])
+        id = stud['_id']['$oid']
+        rv = self.app.delete('/students/'+id+'.json')
+        data = json.loads(rv.data)
+        for i in range(len(data)):
+            if data[i]['_id']['$oid'] == id:
+                assert False
+        assert True
 
 
 if __name__ == '__main__':
