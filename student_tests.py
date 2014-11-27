@@ -20,9 +20,18 @@ class StudentTestCase(unittest.TestCase):
     def get_student(self):
         return Student(first_name="First", last_name= "Last")
 
-    def test_get_students(self):
 
-        pass
+    def test_get_students(self):
+        student = self.get_student()
+        student.save()
+
+        for student in Student.objects:
+            if student.first_name == "First":
+                if student.last_name == "Last":
+                    assert True
+                else:
+                    assert False
+                
 
     def test_create_student(self):
 
@@ -37,12 +46,23 @@ class StudentTestCase(unittest.TestCase):
 
     def test_update_student(self):
 
-        pass
+        student = self.get_student()
+
+        student.first_name = "First_name"
+        student.last_name = "Last_name"
+        assert student.first_name != "First"
+        assert student.last_name != "Last"
 
 
     def test_delete_student(self):
 
-        pass
+        student = self.get_student()
+        student.save()
+        old_student_length = len(Student.objects)
+        student.delete()
+        new_student_length = len(Student.objects)
+
+        assert old_student_length == new_student_length + 1
 
 
 if __name__ == '__main__':
