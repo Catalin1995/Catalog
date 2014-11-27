@@ -35,6 +35,7 @@ def get_students():
 
 @app.route('/students/<id>.json', methods=['GET'])
 def get_students_id(id):
+    # TODO needs improvement
     print(id)
     all_students = Student.objects
     for student in all_students:
