@@ -28,8 +28,8 @@
 				<td>{{student.data_nasteri}}</td>
 				<td>{{student.adresa}}</td>
 				<td>{{student.alte_informati}}</td>
-				<td>{{student.note}}</td><!-- ???afisearea unei liste in tabel-->
-				<td>{{student.absente}}</td><!-- ???afisearea unei liste in tabel-->
+				<td>{{student.note}}</td>
+				<td>{{student.absente}}</td>
 				<td>{{student._id.$oid}}</td>
 				<td><button type = "button" ng-click = "give_stud(student._id.$oid)"/>PrintStud</button>
 					<button type = "button" ng-click = "delete_student_id(student._id.$oid)"/>Delete</button>
@@ -39,49 +39,43 @@
 		</tbody>
 	</table>
 
-<!-- 		Care elev doriti sa-l afisati:
-		{{idStud}}
-		<input type="text" ng-model="idStud"/>
-		<button type= "button" ng-click= "give_stud()" >PrintStud</button> 
-		<button type= "button" ng-click= "delete_student_id()">Delete</button> <br> -->
+	{{studentId.first_name}}
+	{{studentId.last_name}}
+	{{studentId.clasa}}
+	{{studentId.data_nasteri}}
+	{{studentId.adresa}}
+	{{studentId.alte_informati}}
+	{{studentId.note}}
+	{{studentId.absente}}
+	{{studentId.Id}}
+	<br><h4>Adaugare la: {{studentId.first_name}} {{studentId.last_name}}	</h4>
+	Nota:<input type="text" ng-model="nota"/>
+	<button type = "button" ng-click = "add_nota(nota)"/>Adauga</button>
+	{{validate_nota}}
+	<br>
+	Absenta:<input type="text" ng-model="absenta"/>
+	<button type = "button" ng-click = "add_absenta(absenta)"/>Adauga</button>
+	{{validate_absenta}}
+	<br><h5>Adaugare absenta:</h5>
+	<br><h2>Adauga un student nou:</h2>
+	<input type="text" ng-model="first_name"/>Nume<br><br>
+	<input type="text" ng-model="last_name"/>Prenume<br><br>
+	<input type="text" ng-model="clasa"/>Clasa<br><br>
+	<input type="text" ng-model="data_nasteri"/>Data nasteri<br><br>
+	<input type="text" ng-model="adresa"/>Adresa<br><br>
+	<input type="text" ng-model="alte_informati"/>Alte informati<br><br>
+	<button type = "button" ng-click= "adauga_student()">Adauga</button>{{valid_add_student}}<br><br>
 
-		{{studentId.first_name}}
-		{{studentId.last_name}}
-		{{studentId.clasa}}
-		{{studentId.data_nasteri}}
-		{{studentId.adresa}}
-		{{studentId.alte_informati}}
-		{{studentId.note}}
-		{{studentId.absente}}
-		{{studentId.Id}}
-		<br><h4>Adaugare la: {{studentId.first_name}} {{studentId.last_name}}	</h4>
-		Nota:<input type="text" ng-model="nota"/>
-		<button type = "button" ng-click = "add_nota(nota)"/>Adauga</button>
-		{{validate_nota}}
-		<br>
-		Absenta:<input type="text" ng-model="absenta"/>
-		<button type = "button" ng-click = "add_absenta(absenta)"/>Adauga</button>
-		{{validate_absenta}}
-		<br><h5>Adaugare absenta:</h5>
-		<br><h2>Adauga un student nou:</h2>
-		<input type="text" ng-model="first_name"/>Nume<br><br>
-		<input type="text" ng-model="last_name"/>Prenume<br><br>
-		<input type="text" ng-model="clasa"/>Clasa<br><br>
-		<input type="text" ng-model="data_nasteri"/>Data nasteri<br><br>
-		<input type="text" ng-model="adresa"/>Adresa<br><br>
-		<input type="text" ng-model="alte_informati"/>Alte informati<br><br>
-		<button type = "button" ng-click= "adauga_student()">Adauga</button>{{valid_add_student}}<br><br>
+	<input type="text" ng-model="first_name_mod"/>Nume<br><br>
+	<input type="text" ng-model="last_name_mod"/>Prenume<br><br>
+	<input type="text" ng-model="clasa_mod"/>Clasa<br><br>
+	<input type="text" ng-model="data_nasteri_mod"/>Data nasteri<br><br>
+	<input type="text" ng-model="adresa_mod"/>Adresa<br><br>
+	<input type="text" ng-model="alte_informati_mod"/>Alte informati<br><br>
+	<button type="button" ng-click="modifica_student()">Save</button>{{valid_add_student}}<br><br>
 
-		<input type="text" ng-model="first_name_mod"/>Nume<br><br>
-		<input type="text" ng-model="last_name_mod"/>Prenume<br><br>
-		<input type="text" ng-model="clasa_mod"/>Clasa<br><br>
-		<input type="text" ng-model="data_nasteri_mod"/>Data nasteri<br><br>
-		<input type="text" ng-model="adresa_mod"/>Adresa<br><br>
-		<input type="text" ng-model="alte_informati_mod"/>Alte informati<br><br>
-		<button type="button" ng-click="modifica_student()">Save</button>{{valid_add_student}}<br><br>
-
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-resource.js"></script>
-		<script src="/js/catalog.js"></script>
-	</body>
-	</html>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-resource.js"></script>
+	<script src="/js/catalog.js"></script>
+</body>
+</html>
