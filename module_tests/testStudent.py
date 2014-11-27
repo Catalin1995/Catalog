@@ -2,8 +2,8 @@ import os
 import pep8
 import unittest
 import catalog
-from catalog.student import *
-
+from catalog.catalog import Student
+from catalog.catalog import *
 
 class BaseTestCase(unittest.TestCase):
  
