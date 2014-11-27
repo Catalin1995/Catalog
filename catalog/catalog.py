@@ -37,10 +37,11 @@ def get_students():
 
 @app.route('/students/<id>.json', methods=['GET'])
 def get_students_id(id):
-
+    print(id)
     all_students = Student.objects
     for student in all_students:
         if str(student.id) == id:
+            print("asd")
             return student.to_json()
 
 

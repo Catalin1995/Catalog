@@ -6,7 +6,7 @@
 </head>
 <body ng-controller="StudentListController">
 	<a href="/test.html">test</a>
-	<table border=5 style= "width:70%">
+	<table border=5 style= "width:100%">
 		<thead>
 			<tr>
 				<th>First name</th>
@@ -21,29 +21,29 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="stud in students">
-				<td>{{stud.first_name}}</td>
-				<td>{{stud.last_name}}</td>
-				<td>{{stud.clasa}}</td>
-				<td>{{stud.data_nasteri}}</td>
-				<td>{{stud.adresa}}</td>
-				<td>{{stud.alte_informati}}</td>
-				<td>{{stud.note}}</td>
-				<td>{{stud.absente}}</td>
-				<td>{{stud._id.$oid}}</td>
+			<tr ng-repeat="student in students">
+				<td>{{student.first_name}}</td>
+				<td>{{student.last_name}}</td>
+				<td>{{student.clasa}}</td>
+				<td>{{student.data_nasteri}}</td>
+				<td>{{student.adresa}}</td>
+				<td>{{student.alte_informati}}</td>
+				<td>{{student.note}}</td><!-- ???afisearea unei liste in tabel-->
+				<td>{{student.absente}}</td><!-- ???afisearea unei liste in tabel-->
+				<td>{{student._id.$oid}}</td>
 				<td><button type = "button" ng-click = "give_stud(student._id.$oid)"/>PrintStud</button>
 					<button type = "button" ng-click = "delete_student_id(student._id.$oid)"/>Delete</button>
 					<button type = "button" ng-click = "afisare_note(student._id.$oid)"/>Note</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
-		Care elev doriti sa-l afisati:
+<!-- 		Care elev doriti sa-l afisati:
 		{{idStud}}
 		<input type="text" ng-model="idStud"/>
 		<button type= "button" ng-click= "give_stud()" >PrintStud</button> 
-		<button type= "button" ng-click= "delete_student_id()">Delete</button> <br>
+		<button type= "button" ng-click= "delete_student_id()">Delete</button> <br> -->
 
 		{{studentId.first_name}}
 		{{studentId.last_name}}
@@ -51,9 +51,18 @@
 		{{studentId.data_nasteri}}
 		{{studentId.adresa}}
 		{{studentId.alte_informati}}
+		{{studentId.note}}
+		{{studentId.absente}}
 		{{studentId.Id}}
-
-		{{note}}
+		<br><h4>Adaugare la: {{studentId.first_name}} {{studentId.last_name}}	</h4>
+		Nota:<input type="text" ng-model="nota"/>
+		<button type = "button" ng-click = "add_nota(nota)"/>Adauga</button>
+		{{validate_nota}}
+		<br>
+		Absenta:<input type="text" ng-model="absenta"/>
+		<button type = "button" ng-click = "add_absenta(absenta)"/>Adauga</button>
+		{{validate_absenta}}
+		<br><h5>Adaugare absenta:</h5>
 		<br><h2>Adauga un student nou:</h2>
 		<input type="text" ng-model="first_name"/>Nume<br><br>
 		<input type="text" ng-model="last_name"/>Prenume<br><br>
