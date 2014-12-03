@@ -1,3 +1,4 @@
+		body {background-color: red; }
 		/***FIRST STYLE THE BUTTON***/
 		input#addbutton{
 			cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
