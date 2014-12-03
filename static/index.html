@@ -1,81 +1,111 @@
 <!doctype html>
 <html lang="en" ng-app="catalogApp">
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>My HTML File</title>
+	<link rel="stylesheet" href="/css/catalog.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
 <body ng-controller="StudentListController">
-	<a href="/test.html">test</a>
-	<table border=5 style= "width:100%">
-		<thead>
-			<tr>
-				<th>First name</th>
-				<th>Last name</th>
-				<th>Clasa</th>
-				<th>Data nasteri</th>
-				<th>Adresa</th>
-				<th>Alte informati</th>
-				<th>Note</th>
-				<th>Absente</th>
-				<th>ID</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="student in students">
-				<td>{{student.first_name}}</td>
-				<td>{{student.last_name}}</td>
-				<td>{{student.clasa}}</td>
-				<td>{{student.data_nasteri}}</td>
-				<td>{{student.adresa}}</td>
-				<td>{{student.alte_informati}}</td>
-				<td>{{student.note}}</td>
-				<td>{{student.absente}}</td>
-				<td>{{student._id.$oid}}</td>
-				<td><button type = "button" ng-click = "give_stud(student._id.$oid)"/>PrintStud</button>
-					<button type = "button" ng-click = "delete_student_id(student._id.$oid)"/>Delete</button>
-					<button type = "button" ng-click = "afisare_note(student._id.$oid)"/>Note</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
 
-	{{studentId.first_name}}
-	{{studentId.last_name}}
-	{{studentId.clasa}}
-	{{studentId.data_nasteri}}
-	{{studentId.adresa}}
-	{{studentId.alte_informati}}
-	{{studentId.note}}
-	{{studentId.absente}}
-	{{studentId.Id}}
-	<br><h4>Adaugare la: {{studentId.first_name}} {{studentId.last_name}}	</h4>
-	Nota:<input type="text" ng-model="nota"/>
-	<button type = "button" ng-click = "add_nota(nota)"/>Adauga</button>
-	{{validate_nota}}
-	<br>
-	Absenta:<input type="text" ng-model="absenta"/>
-	<button type = "button" ng-click = "add_absenta(absenta)"/>Adauga</button>
-	{{validate_absenta}}
-	<br><h5>Adaugare absenta:</h5>
-	<br><h2>Adauga un student nou:</h2>
-	<input type="text" ng-model="first_name"/>Nume<br><br>
-	<input type="text" ng-model="last_name"/>Prenume<br><br>
-	<input type="text" ng-model="clasa"/>Clasa<br><br>
-	<input type="text" ng-model="data_nasteri"/>Data nasteri<br><br>
-	<input type="text" ng-model="adresa"/>Adresa<br><br>
-	<input type="text" ng-model="alte_informati"/>Alte informati<br><br>
-	<button type = "button" ng-click= "adauga_student()">Adauga</button>{{valid_add_student}}<br><br>
+	<div class="container">
+		<div class = "row">
+			<div class="col-md-12">
+				<table class = "table">
+					<caption>Tabelul care contine elevii si detaliile acestora</caption>
+					<thead>
+						<tr>
+							<th>First name</th>
+							<th>Last name</th>
+							<th>Clasa</th>
+							<th>Data nasteri</th>
+							<th>Adresa</th>
+							<th>Alte informati</th>
+							<th>Note</th>
+							<th>Absente</th>
+							<th>ID</th>
+							<th>Optiuni</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in students">
+							<td>{{student.first_name}}</td>
+							<td>{{student.last_name}}</td>
+							<td>{{student.clasa}}</td>
+							<td>{{student.data_nasteri}}</td>
+							<td>{{student.adresa}}</td>
+							<td>{{student.alte_informati}}</td>
+							<td>{{student.note}}</td>
+							<td>{{student.absente}}</td>
+							<td>{{student._id.$oid}}</td>
+							<td>
+								<button class="btn btn-default" type = "button" ng-click = "give_stud(student._id.$oid)"/>PrintStud</button>
+								<button class="btn btn-default" type = "button" ng-click = "delete_student_id(student._id.$oid)"/>Delete</button>
+								<button class="btn btn-default" type = "button" ng-click = "afisare_note_by_id(student._id.$oid)"/>Note</button>
+								<button class="btn btn-default" type = "button" ng-click = "afisare_absente_by_id(student._id.$oid)"/>Absente</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+		</div>
 
-	<input type="text" ng-model="first_name_mod"/>Nume<br><br>
-	<input type="text" ng-model="last_name_mod"/>Prenume<br><br>
-	<input type="text" ng-model="clasa_mod"/>Clasa<br><br>
-	<input type="text" ng-model="data_nasteri_mod"/>Data nasteri<br><br>
-	<input type="text" ng-model="adresa_mod"/>Adresa<br><br>
-	<input type="text" ng-model="alte_informati_mod"/>Alte informati<br><br>
-	<button type="button" ng-click="modifica_student()">Save</button>{{valid_add_student}}<br><br>
+		<div class = "row">
+			<h3>
+				{{studentId.first_name}}
+				{{studentId.last_name}}
+				{{studentId.clasa}}
+				{{studentId.data_nasteri}}
+				{{studentId.adresa}}
+				{{studentId.alte_informati}}
+				{{studentId.note}}
+				{{studentId.absente}}
+				{{studentId.Id}}
+				<br>
+				{{array_note_msg}} <a ng-repeat = "nota in array_note track by $index"> {{nota}}</a><br>
+				{{array_absente_msg}} <a ng-repeat = "absenta in array_absente track by $index"> {{absenta}}</a>
+			</h3>
+		</div>
 
+		<div class = "row">
+			<h4>Adaugare la: {{studentId.first_name}} {{studentId.last_name}}</h4>
+			<p  style = "white-space: nowrap;">
+				Nota:<input type="text" ng-model="nota"/>
+				<button class="btn btn-default" type = "button" ng-click = "add_nota(nota)"/>Adauga</button>
+				<h4 style = "color: red;">{{validate_nota}}</h4>
+			</p><br>
+
+			Absenta:<input type="text" ng-model="absenta"/>
+			<button class="btn btn-default" type = "button" ng-click = "add_absenta(absenta)"/>Adauga</button>
+			{{validate_absenta}}
+		</div>
+
+		<div class = "row">
+			<h2>Adauga un student nou:</h2>
+			<input type="text" ng-model="first_name"/>Nume<br><br>
+			<input type="text" ng-model="last_name"/>Prenume<br><br>
+			<input type="text" ng-model="clasa"/>Clasa<br><br>
+			<input type="text" ng-model="data_nasteri"/>Data nasteri<br><br>
+			<input type="text" ng-model="adresa"/>Adresa<br><br>
+			<input type="text" ng-model="alte_informati"/>Alte informati<br><br>
+			<button class="btn btn-default" type = "button" ng-click= "adauga_student()">Adauga</button>{{valid_add_student}}
+		</div>
+		<div class = "row">
+			<input type="text" ng-model="first_name_mod"/>Nume<br><br>
+			<input type="text" ng-model="last_name_mod"/>Prenume<br><br>
+			<input type="text" ng-model="clasa_mod"/>Clasa<br><br>
+			<input type="text" ng-model="data_nasteri_mod"/>Data nasteri<br><br>
+			<input type="text" ng-model="adresa_mod"/>Adresa<br><br>
+			<input type="text" ng-model="alte_informati_mod"/>Alte informati<br><br>
+			<button class="btn btn-default" type="button" ng-click="modifica_student()">Save</button>{{valid_add_student}}
+		</div>
+	</div>
+
+	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-resource.js"></script>
 	<script src="/js/catalog.js"></script>
+
 </body>
 </html>

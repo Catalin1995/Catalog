@@ -6,12 +6,16 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
   	$scope.students = result.data;
   });
 
+
+  $scope.array_absente = [];
   $scope.validate_absenta = "";
   $scope.validate_nota = "";
+  $scope.array_absente_msg = "";
+  $scope.array_note_msg = "";
 
   $scope.first_name_mod = ""; 
   $scope.last_name_mod = "";
-  $scope.clsa_mod = "";
+  $scope.clasa_mod = "";
   $scope.data_nasteri_mod = "";
   $scope.adresa_mod = "";
   $scope.alte_informati_mod = "";
@@ -57,83 +61,6 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     return true;
   }
 
-  function complete_type_text(){
-    $scope.first_name_mod = $scope.studentId['first_name'];
-    $scope.last_name_mod = $scope.studentId['last_name'];
-    $scope.clasa_mod = $scope.studentId['clasa'];
-    $scope.data_nasteri_mod = $scope.studentId['data_nasteri'];
-    $scope.adresa_mod = $scope.studentId['adresa'];
-    $scope.alte_informati_mod = $scope.studentId['alte_informati'];
-    $scope.note_mod = $scope.studentId['note']
-    $scope.absente_mod = $scope.studentId['absente']
-  }
-  function remove_type_text(){
-    $scope.first_name_mod = "";
-    $scope.last_name_mod = "";
-    $scope.clasa_mod = "";
-    $scope.data_nasteri_mod = ""; 
-    $scope.adresa_mod = "";
-    $scope.alte_informati_mod = "";
-  }
-  function remove_all(){
-    $scope.first_name = "";
-    $scope.last_name = "";
-    $scope.clasa = "";
-    $scope.data_nasteri = "";
-    $scope.adresa = "";
-    $scope.alte_informati = "";
-    $scope.valid_add_student = "Studentul a fost adaugat";
-  }
-
-  function create_student(){
-    student = {};
-    student['first_name'] = $scope.first_name;
-    student['last_name'] = $scope.last_name;
-    student['clasa'] = $scope.clasa;
-    student['data_nasteri'] = $scope.data_nasteri;
-    student['adresa'] = $scope.adresa;
-    student['alte_informati'] = $scope.alte_informati;
-    return (student);
-  }
-
-  function create_student_to_modif(){
-    student = {};
-    student['first_name'] = $scope.first_name_mod;
-    student['last_name'] = $scope.last_name_mod;
-    student['clasa'] = $scope.clasa_mod;
-    student['data_nasteri'] = $scope.data_nasteri_mod;
-    student['adresa'] = $scope.adresa_mod;
-    student['alte_informati'] = $scope.alte_informati_mod;
-    return (student);
-  }
-
-  function create_student_modif_nota(nota){
-    student = {};
-    student['first_name'] = $scope.first_name_mod;
-    student['last_name'] = $scope.last_name_mod;
-    student['clasa'] = $scope.clasa_mod;
-    student['data_nasteri'] = $scope.data_nasteri_mod;
-    student['adresa'] = $scope.adresa_mod;
-    student['alte_informati'] = $scope.alte_informati_mod;
-    $scope.note_mod.push(nota);
-    student['note'] = $scope.note_mod;
-    student['absente'] = $scope.absente_mod;
-    return (student);
-  }
-
-  function create_student_modif_abs(absenta){
-    student = {};
-    student['first_name'] = $scope.first_name_mod;
-    student['last_name'] = $scope.last_name_mod;
-    student['clasa'] = $scope.clasa_mod;
-    student['data_nasteri'] = $scope.data_nasteri_mod;
-    student['adresa'] = $scope.adresa_mod;
-    student['alte_informati'] = $scope.alte_informati_mod;
-    student['note'] = $scope.note_mod;
-    $scope.absente_mod.push(absenta);
-    student['absente'] = $scope.absente_mod;
-    return (student);
-  } 
 
   function validate_modif_student(student){
     if (student.first_name == ""){
@@ -157,6 +84,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     return true;
   }
 
+
   function validate_nota(nota){
     var valid = parseInt(nota)
     if (valid < 1){
@@ -174,6 +102,138 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     return true
   }
 
+  
+  function complete_type_text(){
+    $scope.first_name_mod = $scope.studentId['first_name'];
+    $scope.last_name_mod = $scope.studentId['last_name'];
+    $scope.clasa_mod = $scope.studentId['clasa'];
+    $scope.data_nasteri_mod = $scope.studentId['data_nasteri'];
+    $scope.adresa_mod = $scope.studentId['adresa'];
+    $scope.alte_informati_mod = $scope.studentId['alte_informati'];
+    $scope.note_mod = $scope.studentId['note']
+    $scope.absente_mod = $scope.studentId['absente']
+  }
+
+
+  function remove_type_text(){
+    $scope.first_name_mod = "";
+    $scope.last_name_mod = "";
+    $scope.clasa_mod = "";
+    $scope.data_nasteri_mod = ""; 
+    $scope.adresa_mod = "";
+    $scope.alte_informati_mod = "";
+  }
+
+
+  function remove_all(){
+    $scope.first_name = "";
+    $scope.last_name = "";
+    $scope.clasa = "";
+    $scope.data_nasteri = "";
+    $scope.adresa = "";
+    $scope.alte_informati = "";
+    $scope.valid_add_student = "Studentul a fost adaugat";
+  }
+
+
+  function create_student(){
+    student = {};
+    student['first_name'] = $scope.first_name;
+    student['last_name'] = $scope.last_name;
+    student['clasa'] = $scope.clasa;
+    student['data_nasteri'] = $scope.data_nasteri;
+    student['adresa'] = $scope.adresa;
+    student['alte_informati'] = $scope.alte_informati;
+    return (student);
+  }
+
+
+  function create_student_to_modif(){
+    student = {};
+    student['first_name'] = $scope.first_name_mod;
+    student['last_name'] = $scope.last_name_mod;
+    student['clasa'] = $scope.clasa_mod;
+    student['data_nasteri'] = $scope.data_nasteri_mod;
+    student['adresa'] = $scope.adresa_mod;
+    student['alte_informati'] = $scope.alte_informati_mod;
+    return (student);
+  }
+
+
+  function create_student_modif_nota(nota){
+    student = {};
+    student['first_name'] = $scope.first_name_mod;
+    student['last_name'] = $scope.last_name_mod;
+    student['clasa'] = $scope.clasa_mod;
+    student['data_nasteri'] = $scope.data_nasteri_mod;
+    student['adresa'] = $scope.adresa_mod;
+    student['alte_informati'] = $scope.alte_informati_mod;
+    $scope.note_mod.push(nota);
+    student['note'] = $scope.note_mod;
+    student['absente'] = $scope.absente_mod;
+    return (student);
+  }
+
+  $scope.afisare_absente = function(){
+    if ($scope.first_name_mod == ""){
+      $scope.array_absente_msg = "Prima data alege un student!!";
+      $scope.array_absente = [];
+    }
+    else{
+      $scope.array_absente = [];
+      $scope.array_absente_msg = "Absentele sunt:";
+      for (i=0;i<$scope.absente_mod.length; i++){
+        $scope.array_absente.push($scope.absente_mod[i]);
+      } 
+    }
+  }
+
+  $scope.afisare_note_by_id = function(id_student){
+    for (i=0; i<$scope.students.length; i++){
+      if ($scope.students[i]['_id']['$oid'] == id_student){
+        $scope.array_note = [];
+        $scope.array_note_msg = "Notele sunt:";
+        for (j=0; j<$scope.students[i]['note'].length; j++){
+          $scope.array_note.push($scope.students[i]['note'][j]);
+        }
+        if ($scope.array_note.length == 0){
+          $scope.array_note_msg = "Acest elev nu are note!"
+        }
+      }
+    }
+  }
+
+  $scope.afisare_absente_by_id = function(id_student){
+    for (i=0; i<$scope.students.length; i++){
+      if ($scope.students[i]['_id']['$oid'] == id_student){
+        $scope.array_absente = [];
+        $scope.array_absente_msg = "Absentele sunt:";
+        for (j=0; j<$scope.students[i]['absente'].length; j++){
+          $scope.array_absente.push($scope.students[i]['absente'][j]);
+        }
+        if ($scope.array_absente.length == 0){
+          $scope.array_absente_msg = "Acest elev nu are absente!";
+        }
+      }
+    }
+  }
+
+  function create_student_modif_abs(absenta){
+    student = {};
+    student['first_name'] = $scope.first_name_mod;
+    student['last_name'] = $scope.last_name_mod;
+    student['clasa'] = $scope.clasa_mod;
+    student['data_nasteri'] = $scope.data_nasteri_mod;
+    student['adresa'] = $scope.adresa_mod;
+    student['alte_informati'] = $scope.alte_informati_mod;
+    student['note'] = $scope.note_mod;
+    $scope.absente_mod.push(absenta);
+    student['absente'] = $scope.absente_mod;
+    return (student);
+  } 
+
+
+
   $scope.give_stud = function(id_student){
     var url = "/students/"+id_student+".json";
     $http.get(url).then(function (result) {
@@ -183,6 +243,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
       complete_type_text()
     });
   }
+
 
   $scope.add_nota = function(){
     if ($scope.first_name_mod == ""){
@@ -205,6 +266,7 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
     }
   } 
 
+
   $scope.add_absenta = function(){
     if ($scope.first_name_mod == ""){
       $scope.validate_absenta = "Selectati un elev"
@@ -224,7 +286,8 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
       $scope.validate_absenta = "Absenta invalida"
       $scope.validate_nota = "";
     }
-    }
+  }
+
 
   $scope.modif_stud = function(){
     complete_type_text()
