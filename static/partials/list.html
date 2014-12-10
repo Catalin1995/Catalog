@@ -1,0 +1,84 @@
+<table class = "table">
+	<caption><h2>Tabelul care contine elevii si detaliile acestora</h2></caption>
+	<thead>
+		<tr>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>Clasa</th>
+			<th>Data nasteri</th>
+			<th>Adresa</th>
+			<th>Alte informati</th>
+			<th>Note</th>
+			<th>Absente</th>
+			<th>ID</th>
+			<th>Optiuni</th>
+		</tr>
+	</thead>	 	
+	<tbody>
+		<tr ng-repeat="student in students">
+			<td>{{student.first_name}}</td>
+			<td>{{student.last_name}}</td>
+			<td>{{student.clasa}}</td>
+			<td>{{student.data_nasteri}}</td>
+			<td>{{student.adresa}}</td>
+			<td>{{student.alte_informati}}</td>
+			<td>{{student.note}}</td>
+			<td>{{student.absente}}</td>
+			<td>{{student._id.$oid}}</td>
+			<td>
+				<a href="#student/5488546115c2f312b80a296e">show details</a>
+				<button class="btn btn-default" type = "button" ng-click = "give_stud(student._id.$oid)"/>PrintStud</button>
+				<button class="btn btn-default" type = "button" ng-click = "delete_student_id(student._id.$oid)"/>Delete</button>
+				<button class="btn btn-default" type = "button" ng-click = "afisare_note_by_id(student._id.$oid)"/>Note</button>
+				<button class="btn btn-default" type = "button" ng-click = "afisare_absente_by_id(student._id.$oid)"/>Absente</button>
+			</td>
+		</tr>
+	</tbody>
+	</table
+	<div class = "row">
+
+		<h4>Adaugare la: {{studentId.first_name}} {{studentId.last_name}}</h4>
+		<form class="form-inline" role="form">
+			<div class="col-md-4">
+				<input class="form-control" placeholder="Nota" type="text" ng-model="nota"/>
+				<button class="btn btn-default" type = "button" ng-click = "add_nota(nota)"/>Adauga</button>
+				<h4 style = "color: red;">{{validate_nota}}</h4><br>
+
+			</div>
+
+			<input class="form-control" placeholder="Absenta" type="text" ng-model="absenta"/>
+			<button class="btn btn-default" type = "button" ng-click = "add_absenta(absenta)"/>Adauga</button>
+			<h4 style = "color: red;">{{validate_absenta}}</h4><br>
+		</form>
+	</div>
+
+	<div class = "row">
+		<h3>
+			{{studentId.first_name}}
+			{{studentId.last_name}}
+			{{studentId.clasa}}
+			{{studentId.data_nasteri}}
+			{{studentId.adresa}}
+			{{studentId.alte_informati}}
+			{{studentId.note}}
+			{{studentId.absente}}
+			{{studentId.Id}}<br>
+			{{array_note_msg}} <a ng-repeat = "nota in array_note"> {{nota}}</a><br>
+			{{array_absente_msg}} <a ng-repeat = "absenta in array_absente"> {{absenta}}</a>
+		</h3>
+	</div>
+
+	<div class = "row">
+		<form>
+			<br>
+			<h2>Modifica un student:</h2>
+			<div class = "col-md-6">
+				<input class="form-control" placeholder="Nume" type="text" ng-model="first_name_mod"/>
+				<input class="form-control" placeholder="Prenume" type="text" ng-model="last_name_mod"/>
+				<input class="form-control" placeholder="Clasa" type="text" ng-model="clasa_mod"/>
+				<input class="form-control" placeholder="Data nasteri" type="text" ng-model="data_nasteri_mod"/>
+				<input class="form-control" placeholder="Adresa" type="text" ng-model="adresa_mod"/>
+				<input class="form-control" placeholder="Alte informati" type="text" ng-model="alte_informati_mod"/>
+				<button class="btn btn-default" type="button" ng-click="modifica_student()">Save</button>{{valid_add_student}}
+			</form>
+		</div>
