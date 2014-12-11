@@ -1,0 +1,28 @@
+<h1> Detali despre acest student: </h1>
+<h3>
+	Nume: {{student.first_name}}<br>
+	Prenume: {{student.last_name}}<br>
+	Clasa: {{student.clasa}}<br>
+	Data nasteri: {{student.data_nasteri}}<br>
+	Adresa: {{student.adresa}}<br>
+	Alte informati: {{student.alte_informati}}<br>
+	Id: {{student._id.$oid}}<br>
+</h3>
+
+
+
+<table class = "table">
+	<caption><h2>Tabel cu notele acestui elev</h2></caption>
+	<thead>
+		<tr>
+			<th>Note</th>
+			<th>Absente</th>
+		</tr>
+	</thead>	 	
+	<tbody>
+		<tr>
+			<td><a ng-repeat = "nota in student.note track by $index"> {{nota}}, </a><br></td>
+			<td><a ng-repeat = "absenta in student.absente track by $index"> {{absenta}}, </a></td>
+		</tr>
+	</tbody>
+</table>

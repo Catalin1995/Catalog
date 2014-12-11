@@ -1,45 +1,42 @@
 // TODO indetare.  de ce incepe cu spatiu?
-  var catalogApp = angular.module('catalogApp', ['ngRoute']);
+var catalogApp = angular.module('catalogApp', ['ngRoute']);
+catalogApp.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider
+    .when('/students', { //list all students
+      templateUrl: "partials/students/list.html",
+      controller: "StudentListController"
+    })
 
-  catalogApp.config(['$routeProvider',
-    function($routeProvider) {
-      $routeProvider
-      .when('/students', {
-        // TODO move to partials/students/list.html
-        templateUrl: "partials/list.html",
-        controller: "StudentListController"
-      })
-
-      .when('/modifStudent',{
+    .when('/modifStudent',{
         // TODO move to partials/students/update.html
-        templateUrl: "partials/modifStudent.html",
+        templateUrl: "partials/students/update.html",
         controller: "StudentListController"
       })
 
       // TODO move to partials/students/show.html
       .when('/student/:orderId',{
-        templateUrl: 'partials/modifStudent.html',
-        controller: "StudentModifController"
+        templateUrl: 'partials/students/details.html',
+        controller: "StudentDetailsController"
       })
 
       .when('/addStudent', {
         // TODO move to partials/students/new.html
-        templateUrl: "partials/addstudent.html",
-        controller: "StudentListController"
+        templateUrl: "partials/students/new.html",
+        controller: "StudentListController" 
       });
     }]);
 
+
   // TODO rename to StudentController
   // TODO move to js/controllers/StudentController.js
-  catalogApp.controller('StudentModifController', function ($scope, $http, $routeParams) {
-    // TODO rename to studentId
-    $scope.order_id = $routeParams.orderId;
-    var url = "/students/"+$scope.order_id+".json";
+  catalogApp.controller('StudentDetailsController', function ($scope, $http, $routeParams) {
+    $scope.stud_id = $routeParams.orderId;
+    var url = "/students/"+$scope.stud_id+".json";
     $http.get(url).then(function (result) {
       console.log(result);
-      $scope.studentId = result.data;
-    })
-    $scope.message = $scope.order_id
+      $scope.student = result.data;   
+    });
   });
 
   // TODO move to js/controllers/StudentListController.js
@@ -311,81 +308,70 @@
     } 
 
 
-  //   $scope.add_absenta = function(){
-  //     if ($scope.first_name_mod == ""){
-  //       $scope.validate_absenta = "Selectati un elev"
-  //       $scope.validate_nota = "";
-  //     }
-  //     else if ($scope.absenta != ""){
-  //       student = create_student_modif_abs($scope.absenta);
-  //       var url = "/students/"+$scope.idStud+".json";
-  //       $http.patch(url, student).then(function (result){
-  //         console.log(result);
-  //         $scope.students = result.data;
-  //       });
-  //       $scope.validate_absenta = "Absenta a fost adaugata";
-  //       $scope.absenta = "";
-  //     }
-  //     else{
-  //       $scope.validate_absenta = "Absenta invalida"
-  //       $scope.validate_nota = "";
-  //     }
-  //   }
-
-  //   var url = "/students.json";
-  //   student = create_student();
-
-  //   $http.post("/students.json", student).then(function (result){
-  //     console.log(result);
-  //     $scope.students.push(result.data);
-  //   });
-  //   remove_all();
-  // }
-// }
+    $scope.add_absenta = function(){
+      if ($scope.first_name_mod == ""){
+        $scope.validate_absenta = "Selectati un elev"
+        $scope.validate_nota = "";
+      }
+      else if ($scope.absenta != ""){
+        student = create_student_modif_abs($scope.absenta);
+        var url = "/students/"+$scope.idStud+".json";
+        $http.patch(url, student).then(function (result){
+          console.log(result);
+          $scope.students = result.data;
+        });
+        $scope.validate_absenta = "Absenta a fost adaugata";
+        $scope.absenta = "";
+      }
+      else{
+        $scope.validate_absenta = "Absenta invalida"
+        $scope.validate_nota = "";
+      }
+    }
 
 
-$scope.modif_stud = function(){
-  complete_type_text()
-}
+    $scope.modif_stud = function(){
+      complete_type_text()
+    }
 
-$scope.delete_student_id = function(id_student){
-  var url = "/students/"+id_student+".json";
-  $http.delete(url).then(function (result){
-    console.log(result);
-    $scope.students = result.data;
-  });
-}
+    $scope.delete_student_id = function(id_student){
+      var url = "/students/"+id_student+".json";
+      $http.delete(url).then(function (result){
+        console.log(result);
+        $scope.students = result.data;
+      });
+    }
 
-$scope.adauga_student = function(){
+    $scope.adauga_student = function(){
 
-  if (!validate_add_student()) {
-    $scope.valid_add_student = "Invalid";
+      if (!validate_add_student()) {
+        $scope.valid_add_student = "Invalid";
+      }
+      else{
+        var url = "/students.json";
+        student = create_student();
+
+        $http.post("/students.json", student).then(function (result){
+          console.log(result);
+          $scope.students.push(result.data);
+        });
+        remove_all();
+      }
+    }
+
+
+    $scope.modifica_student = function(){
+      var student = create_student_to_modif();
+      if (!validate_modif_student(student)){
+       $scope.valid_modif_student = "Invalid";
+     }
+     else{
+      var url = "/students/"+$scope.idStud+".json";
+      $http.patch(url, student).then(function (result){
+        console.log(result);
+        $scope.students = result.data;
+        $scope.valid_modif_student = "Studentul a fost modificat!"
+      });
+    }
   }
-  else{
-    var url = "/students.json";
-    student = create_student();
-
-    $http.post("/students.json", student).then(function (result){
-      console.log(result);
-      $scope.students.push(result.data);
-    });
-    remove_all();
-  }
-}
-
-
-$scope.modifica_student = function(){
-  var student = create_student_to_modif();
-  if (!validate_modif_student(student)){
-   $scope.valid_modif_student = "Invalid";
- }
- else{
-  var url = "/students/"+$scope.idStud+".json";
-  $http.patch(url, student).then(function (result){
-    console.log(result);
-    $scope.students = result.data;
-    $scope.valid_modif_student = "Studentul a fost modificat!"
-  });
-}
-}
 });
