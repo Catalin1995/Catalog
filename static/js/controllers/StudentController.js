@@ -3,19 +3,12 @@ catalogApp.controller('StudentDetailsController', function ($scope, $http, $rout
 	var url = "/students/"+$scope.stud_id+".json";
 	$http.get(url).then(function (result) {
 		console.log(result);
-		$scope.student = result.data;  
-		complete() 
+		$scope.student = result.data;
 	});
 
-	$scope.first_name_mod = "";
-	$scope.last_name_mod = "";
-	$scope.clasa_mod = "";
-	$scope.data_nasteri_mod = "";
-	$scope.adresa_mod = "";
-	$scope.alte_informati_mod = "";
-	$scope.note_mod = "";
-	$scope.absente_mod = "";
 	$scope.valid_modif_student = "";
+
+	$scope.student = {};
 
 	function validate_modif_student(student){
 		if (student.first_name == ""){
@@ -34,6 +27,15 @@ catalogApp.controller('StudentDetailsController', function ($scope, $http, $rout
 			return false;
 		}
 		if (student.alte_informati == ""){
+			return false;
+		}
+		if (student.telefon == ""){
+			return false;
+		}
+		if (student.cnp == ""){
+			return false;
+		}
+		if (student.mail == ""){
 			return false;
 		}
 		return true;
@@ -56,70 +58,17 @@ catalogApp.controller('StudentDetailsController', function ($scope, $http, $rout
 		return true
 	}
 
-	function complete(){
-		$scope.first_name_mod = $scope.student['first_name'];
-		$scope.last_name_mod = $scope.student['last_name'];
-		$scope.clasa_mod = $scope.student['clasa'] ;
-		$scope.data_nasteri_mod = $scope.student['data_nasteri'];
-		$scope.adresa_mod = $scope.student['adresa'];
-		$scope.alte_informati_mod = $scope.student['alte_informati'];
-		$scope.absente_mod = $scope.student['absente'];
-		$scope.note_mod = $scope.student['note'];
-	}
 
-	function create_student_modif_nota(nota){
-		student = {};
-		student['first_name'] = $scope.first_name_mod;
-		student['last_name'] = $scope.last_name_mod;
-		student['clasa'] = $scope.clasa_mod;
-		student['data_nasteri'] = $scope.data_nasteri_mod;
-		student['adresa'] = $scope.adresa_mod;
-		student['alte_informati'] = $scope.alte_informati_mod;
-		$scope.note_mod.push(nota);
-		student['note'] = $scope.note_mod;
-		student['absente'] = $scope.absente_mod;
-		return (student);
-	}
-
-
-	function create_student_modif_abs(absenta){
-		student = {};
-		student['first_name'] = $scope.first_name_mod;
-		student['last_name'] = $scope.last_name_mod;
-		student['clasa'] = $scope.clasa_mod;
-		student['data_nasteri'] = $scope.data_nasteri_mod;
-		student['adresa'] = $scope.adresa_mod;
-		student['alte_informati'] = $scope.alte_informati_mod;
-		student['note'] = $scope.note_mod;
-		$scope.absente_mod.push(absenta);
-		student['absente'] = $scope.absente_mod;
-		return (student);
-	}
-
-	function create_student_to_modif(){
-		student = {};
-		student['first_name'] = $scope.first_name_mod;
-		student['last_name'] = $scope.last_name_mod;
-		student['clasa'] = $scope.clasa_mod;
-		student['data_nasteri'] = $scope.data_nasteri_mod;
-		student['adresa'] = $scope.adresa_mod;
-		student['alte_informati'] = $scope.alte_informati_mod;
-		student['note'] = $scope.note_mod;
-		student['absente'] = $scope.absente_mod;
-		return (student);
-	}
-	
 	$scope.modifica_student = function(){
-		var student = create_student_to_modif();
-		if (!validate_modif_student(student)){
+		if (!validate_modif_student($scope.student)){
 			$scope.valid_modif_student = "Invalid";
 		}
 		else{		
 			idStudent = $scope.student['_id']['$oid'];
 			var url = "/students/"+idStudent+".json";
-			$http.patch(url, student).then(function (result){
+			$http.patch(url, $scope.student).then(function (result){
 				console.log(result);
-				$scope.students = result.data;
+				$scope.student = result.data;
 				$scope.valid_modif_student = "Studentul a fost modificat!"
 			});
 		}

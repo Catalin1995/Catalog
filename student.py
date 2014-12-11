@@ -9,6 +9,9 @@ class Student(Document):
     data_nasteri = StringField(max_length=50)
     adresa = StringField(max_length=50)
     alte_informati = StringField(max_length=50)
+    mail = StringField(max_length=50)
+    telefon = StringField(max_length=50)
+    cnp = StringField(max_length=50)
     note = ListField()
     absente = ListField()
     
@@ -20,5 +23,8 @@ class Student(Document):
         self.data_nasteri = new_stud['data_nasteri']
         self.adresa = new_stud['adresa']
         self.alte_informati = new_stud['alte_informati']
+        self.mail = new_stud['mail']
+        self.telefon = new_stud['telefon']
+        self.cnp = new_stud['cnp']
         self.note = new_stud['note']
         self.absente = new_stud['absente']

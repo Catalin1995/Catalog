@@ -4,17 +4,23 @@
 		<h2>Detali despre student:</h2>
 		<div class = "col-md-6">
 			<h4>Nume</h4>
-			<input class="form-control" placeholder="Nume" type="text" ng-model="first_name_mod"/>
+			<input class="form-control" placeholder="Nume" type="text" ng-model="student.first_name"/>
 			<h4>Prenume</h4>
-			<input class="form-control" placeholder="Prenume" type="text" ng-model="last_name_mod"/>
+			<input class="form-control" placeholder="Prenume" type="text" ng-model="student.last_name"/>
 			<h4>Clasa</h4>
-			<input class="form-control" placeholder="Clasa" type="text" ng-model="clasa_mod"/>
+			<input class="form-control" placeholder="Clasa" type="text" ng-model="student.clasa"/>
 			<h4>Data nasteri</h4>
-			<input class="form-control" placeholder="Data nasteri" type="text" ng-model="data_nasteri_mod"/>
+			<input class="form-control" placeholder="Data nasteri" type="text" ng-model="student.data_nasteri"/>
 			<h4>Adresa</h4>
-			<input class="form-control" placeholder="Adresa" type="text" ng-model="adresa_mod"/>
+			<input class="form-control" placeholder="Adresa" type="text" ng-model="student.adresa"/>
 			<h4>Alte informati</h4>
-			<input class="form-control" placeholder="Alte informati" type="text" ng-model="alte_informati_mod"/><br>
+			<input class="form-control" placeholder="Alte informati" type="text" ng-model="student.alte_informati"/><br>
+			<h4>CNP</h4>
+			<input class="form-control" placeholder="CNP" type="text" ng-model="student.cnp"/><br>
+			<h4>Mail</h4>
+			<input class="form-control" placeholder="Mail" type="text" ng-model="student.mail"/><br>
+			<h4>Telefon</h4>
+			<input class="form-control" placeholder="Telefon" type="text" ng-model="student.telefon"/><br>
 			<button class="btn btn-default" type="button" ng-click="modifica_student()">Save</button> {{valid_modif_student}}
 		</form>
 	</div>

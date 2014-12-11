@@ -40,7 +40,6 @@ def get_students_id(id):
     all_students = Student.objects
     for student in all_students:
         if str(student.id) == id:
-            print("asd")
             return student.to_json()
 
 
@@ -61,7 +60,7 @@ def modif_student(id):
     student = Student.objects.get(id=id)
     student.update_student(new_student)
     student.save()
-    return Student.objects.to_json()
+    return student.to_json()
 
 
 @app.route('/students/<id>.json', methods=['DELETE'])
