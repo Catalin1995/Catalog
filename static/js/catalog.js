@@ -1,9 +1,8 @@
-// TODO indetare.  de ce incepe cu spatiu?
 var catalogApp = angular.module('catalogApp', ['ngRoute']);
 catalogApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
-    .when('/students', { //list all students
+    .when('/students', {
       templateUrl: "partials/students/list.html",
       controller: "StudentListController"
     })
@@ -14,14 +13,12 @@ catalogApp.config(['$routeProvider',
         controller: "StudentListController"
       })
 
-      // TODO move to partials/students/show.html
       .when('/student/:orderId',{
-        templateUrl: 'partials/students/details.html',
+        templateUrl: 'partials/students/show.html',
         controller: "StudentDetailsController"
       })
 
       .when('/addStudent', {
-        // TODO move to partials/students/new.html
         templateUrl: "partials/students/new.html",
         controller: "StudentListController" 
       });
