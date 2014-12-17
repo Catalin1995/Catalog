@@ -1,3 +1,13 @@
+angular.module('UserService',['ngResource']).factory('Student', function($resource){
+	var Student = $resource('/students/:id.json',
+	{ 
+		delete_student: {
+			method: 'DELETE',
+		}
+	}); 
+	return Student ;
+});  
+
 catalogApp.controller('StudentDetailsController', function ($scope, $http, $routeParams) {
 	$scope.stud_id = $routeParams.orderId;
 	var url = "/students/"+$scope.stud_id+".json";
@@ -58,7 +68,6 @@ catalogApp.controller('StudentDetailsController', function ($scope, $http, $rout
 		return true
 	}
 
-
 	$scope.modifica_student = function(){
 		if (!validate_modif_student($scope.student)){
 			$scope.valid_modif_student = "Invalid";
@@ -115,12 +124,22 @@ catalogApp.controller('StudentDetailsController', function ($scope, $http, $rout
 		}
 	}
 
+
 	$scope.delete_student_id = function(){
-		idStud = $scope.student['_id']['$oid'];
-		var url = "/students/"+idStud+".json";
-		$http.delete(url).then(function (result){
-			console.log(result);
-			$scope.students = result.data;
-		});
+		id = $scope.student['_id']['$oid'];
+		var data  = {id: id};
+		Student.delete_student(data);
 	}
 });
+
+
+
+// 	$scope.delete_student_id = function(){
+// 		idStud = $scope.student['_id']['$oid'];
+// 		var url = "/students/"+idStud+".json";
+// 		$http.delete(url).then(function (result){
+// 			console.log(result);
+// 			$scope.students = result.data;
+// 		});
+// 	}
+// });
