@@ -4,4 +4,3 @@ catalogApp.controller('StudentListController', function ($scope, $http) {
    $scope.students = result.data;
  });
 });
- 
