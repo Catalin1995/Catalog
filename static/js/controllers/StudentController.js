@@ -1,15 +1,10 @@
-angular.module('UserService',['ngResource']).factory('Student', function($resource){
-	var Student = $resource('/students/:id.json',
-	{ 
-		delete_student: {
-			method: 'DELETE',
-		}
-	}); 
-	return Student ;
-});  
+catalogApp.factory('Student', function($resource){
+	return $resource('/students/:id.json', {});
+});
 
-catalogApp.controller('StudentDetailsController', function ($scope, $http, $routeParams) {
+catalogApp.controller('StudentDetailsController', function ($scope, $http, $routeParams, Student) {
 	$scope.stud_id = $routeParams.orderId;
+	// Student.get(data)
 	var url = "/students/"+$scope.stud_id+".json";
 	$http.get(url).then(function (result) {
 		console.log(result);
@@ -128,18 +123,6 @@ catalogApp.controller('StudentDetailsController', function ($scope, $http, $rout
 	$scope.delete_student_id = function(){
 		id = $scope.student['_id']['$oid'];
 		var data  = {id: id};
-		Student.delete_student(data);
+		Student.delete(data);
 	}
 });
-
-
-
-// 	$scope.delete_student_id = function(){
-// 		idStud = $scope.student['_id']['$oid'];
-// 		var url = "/students/"+idStud+".json";
-// 		$http.delete(url).then(function (result){
-// 			console.log(result);
-// 			$scope.students = result.data;
-// 		});
-// 	}
-// });

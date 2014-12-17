@@ -67,9 +67,10 @@ def modif_student(id):
 def delete_students_id(id):
 
     student = Student.objects.get(id=id)
+    copieStudent = student
     student.delete()
     all_students = Student.objects
-    return all_students.to_json()
+    return copieStudent.to_json()
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 1337))

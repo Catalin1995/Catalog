@@ -1,4 +1,5 @@
-var catalogApp = angular.module('catalogApp', ['ngRoute']);
+var catalogApp = angular.module('catalogApp', ['ngRoute', 'ngResource']);
+
 catalogApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider

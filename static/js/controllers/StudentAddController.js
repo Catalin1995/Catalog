@@ -1,3 +1,5 @@
+
+
 catalogApp.controller('StudentAddController', function ($scope, $http) {
 
 	$scope.student = {};
@@ -46,7 +48,6 @@ catalogApp.controller('StudentAddController', function ($scope, $http) {
 				console.log(result);
 			});
 			$scope.valid_add_student = "Studentul a fost adaugat";
-			removeAll();
 		}
 	}
 });
