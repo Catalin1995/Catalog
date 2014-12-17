@@ -1,6 +1,8 @@
+catalogApp.factory('Student', function($resource){
+	return $resource('/students/:id.json', {});
+});
 
-
-catalogApp.controller('StudentAddController', function ($scope, $http) {
+catalogApp.controller('StudentAddController', function ($scope, $http, Student) {
 
 	$scope.student = {};
 	$scope.valid_add_student = "";
@@ -42,11 +44,7 @@ catalogApp.controller('StudentAddController', function ($scope, $http) {
 			$scope.valid_add_student = "Invalid";
 		}
 		else{
-			var url = "/students.json";
-
-			$http.post("/students.json", $scope.student).then(function (result){
-				console.log(result);
-			});
+			Student.save($scope.student)
 			$scope.valid_add_student = "Studentul a fost adaugat";
 		}
 	}

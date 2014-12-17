@@ -4,16 +4,11 @@ catalogApp.factory('Student', function($resource){
 
 catalogApp.controller('StudentDetailsController', function ($scope, $http, $routeParams, Student) {
 	$scope.stud_id = $routeParams.orderId;
-	// Student.get(data)
-	var url = "/students/"+$scope.stud_id+".json";
-	$http.get(url).then(function (result) {
-		console.log(result);
-		$scope.student = result.data;
-	});
+	var data = {id: $scope.stud_id}
+	$scope.student = Student.get(data)	
+	console.log($scope.student);
 
 	$scope.valid_modif_student = "";
-
-	$scope.student = {};
 
 	function validate_modif_student(student){
 		if (student.first_name == ""){
